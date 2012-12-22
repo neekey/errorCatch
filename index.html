@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="http://cloud.github.com/downloads/eriwen/javascript-stacktrace/stacktrace-min-0.4.js"></script>
+</head>
+<body>
+    <button id="J_Btn">inline1</button>
+    <button id="J_Btn2">inline2</button>
+    <button id="J_Btn3">script</button>
+    <button id="J_Btn4">eval</button>
+    <script type="text/javascript" src="./index.js"></script>
+    <script>
+        ;(function(){
+
+        function btnClick(){
+            var a = b;
+        }
+
+        var btn = document.getElementById( 'J_Btn' );
+        btn.onclick=btnClick;
+
+
+    })();</script>
+    <script>
+        ;(function(){
+        function btnClick2(){
+            var b = a;
+        }
+
+        var btn = document.getElementById( 'J_Btn2' );
+        btn.onclick = btnClick2;
+
+    })();</script>
+</body>
+</html>
