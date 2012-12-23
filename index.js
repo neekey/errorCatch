@@ -1,27 +1,46 @@
 ;(function(){
 
-    window.onerror = function (em, url, ln) {
-            alert(em + ", hhahahaha " + url + ", " + ln);
-            console.log( printStackTrace().join('\n\n') );
-            return false;
-    };
+    function indent(text){
 
-    function btnClick(){
-        var c = d;
+        var lines = text.split( '\n' );
+        var intentedLine = [];
+        var no;
+        var line;
+        for( no = 0; line = lines[ no ]; no++ ){
+            intentedLine.push( '\t' + line );
+        }
+
+        return intentedLine.join( '\n' );
     }
 
-    var btn = document.getElementById( 'J_Btn3' );
-    btn.onclick = btnClick;
 
-    var btnEval = document.getElementById( 'J_Btn4' );
-    btnEval.onclick = function(){
-        eval('var e =f;');
-    };
+    /*
+    TraceKit.report.subscribe(function(stackInfo){
+//        console.log( stackInfo );
 
-    var script = document.createElement( 'script');
-    document.body.appendChild( script );
-    script.innerHTML = ( '\n \n \n var z = x;' );
+        console.log( 'type: ', stackInfo.mode, ' msg: ', stackInfo.message );
 
+        var stack = stackInfo.stack;
+        var line;
+        var index;
+
+        if (!stack || stack.length === 0) return;
+
+        if (stack[0].context){
+            console.log(indent(stack[0].context.join('\n')));
+        }
+
+        for ( index = 0; index < stack.length; index++){
+            line = stack[ index ];
+
+            console.log('    at ' + line.func + ' (' + [line.url, line.line, line.column].join(':') + ')');
+        }
+    });
+    */
+
+    window.onerror = function( msg, url, no ){
+        alert( msg + ', ' + url + ':' + no );
+    }
 })();
 
 

@@ -3,35 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <script type="text/javascript" src="http://cloud.github.com/downloads/eriwen/javascript-stacktrace/stacktrace-min-0.4.js"></script>
+    <script type="text/javascript" src="./tracekit.js"></script>
+    <script type="text/javascript" src="./index.js"></script>
+
 </head>
 <body>
-    <button id="J_Btn">inline1</button>
-    <button id="J_Btn2">inline2</button>
-    <button id="J_Btn3">script</button>
-    <button id="J_Btn4">eval</button>
-    <script type="text/javascript" src="./index.js"></script>
+    <button id="J_BtnInline">Inline Script</button>
+    <button id="J_BtnInline2">Inline Script 2</button>
+    <button id="J_BtnExternalScript">External Script</button>
+    <button id="J_BtnCrossDomainExternalScript">Cross Domain External Script</button>
+    <button id="J_BtnEval">Eval</button>
+    <button id="J_BtnDynamicInline">Dynamic Inline</button>
     <script>
-        ;(function(){
+    (function(){
 
-        function btnClick(){
+        /**
+         * 页面内脚本
+         */
+
+        var btn = document.getElementById( 'J_BtnInline' );
+
+        /**
+         * b 未定义，会报错
+         */
+
+        btn.onclick=function(){
             var a = b;
-        }
+        };
 
-        var btn = document.getElementById( 'J_Btn' );
-        btn.onclick=btnClick;
-
-
-    })();</script>
+    })();
+    </script>
     <script>
-        ;(function(){
-        function btnClick2(){
-            var b = a;
-        }
+    (function(){
 
-        var btn = document.getElementById( 'J_Btn2' );
-        btn.onclick = btnClick2;
+        /**
+         * 页面内的第二个脚本
+         * 用于测试行内脚本的提示lineNumber规律
+         */
+
+        var btn = document.getElementById( 'J_BtnInline2' );
+
+        /**
+         * a 未定义，会报错
+         */
+
+        btn.onclick = function(){
+            var b = a;
+        };
 
     })();</script>
+    <script type="text/javascript" src="./external_script.js"></script>
+    <script type="text/javascript" src="http://10.7.66.4:8080/cross_domain_external_script.js"></script>
+    <script type="text/javascript" src="./eval.js"></script>
+    <script type="text/javascript" src="./dynamic_inline.js"></script>
 </body>
 </html>
